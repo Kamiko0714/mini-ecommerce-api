@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mini-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mini-api
+  template:
+    metadata:
+      labels:
+        app: mini-api
+    spec:
+      containers:
+        - name: mini-api
+          image: mini-ecommerce-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+

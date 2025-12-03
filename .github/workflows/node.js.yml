@@ -28,4 +28,12 @@ jobs:
 
       - name: Build Docker image
         run: |
+          echo "Starting Build"
           docker build -t mini-ecommerce-api:${{ github.sha }} .
+          echo "Build Finish"
+
+      - name: Deploy Kubernetes
+        run: |
+          echo "Deploy to K8s"
+          kubectl apply -f k8s/
+          echo "Deploy Finish"
