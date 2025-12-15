@@ -31,16 +31,16 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Setup kind cluster
+        run: |
+          curl -s https://raw.githubusercontent.com/kubernetes-sigs/kind/main/hack/install.sh | bash
+          kind create cluster
+
       - name: Build Docker image
         run: |
           echo "Starting Build"
           docker build -t mini-ecommerce-api:${{ github.sha }} .
           echo "Build Finish"
-
-      - name: Setup kind cluster
-        run: |
-          curl -s https://raw.githubusercontent.com/kubernetes-sigs/kind/main/hack/install.sh | bash
-          kind create cluster
 
       - name: Deploy Kubernetes
         run: |
