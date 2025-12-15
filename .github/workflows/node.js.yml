@@ -37,6 +37,11 @@ jobs:
           docker build -t mini-ecommerce-api:${{ github.sha }} .
           echo "Build Finish"
 
+      - name: Setup kind cluster
+        run: |
+          curl -s https://raw.githubusercontent.com/kubernetes-sigs/kind/main/hack/install.sh | bash
+          kind create cluster
+
       - name: Deploy Kubernetes
         run: |
           echo "Deploy to K8s"
